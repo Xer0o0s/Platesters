@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Confirmation d'email</title>
+    <!-- Inclusion de Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+          <div class="card">
+            <div class="card-body">
+              <h3 class="card-title">Confirmation d'email</h3>
+              <p class="card-text">Merci de confirmer votre adresse email en cliquant sur le bouton ci-dessous :</p>
+              <a href="{{ signedUrl|raw }}" class="btn btn-primary btn-block">Confirmer mon email</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Inclusion de jQuery et de Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  </body>
+</html>

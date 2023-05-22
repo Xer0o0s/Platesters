@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail Produit
+{% endblock %}
+
+{% block body %}
+	<div class="container-fluid">
+		<div class=" row justify-content-center">
+			<div class="col-12 col-md-9 p-4 m-3 rounded-5 shadow" style="background-color :#eaeaea">
+				<h1 class="text-center text-dark mt-4 pt-4 display-1 fw-bold">{{ produit.designation | capitalize }}</h1>
+				<div class="row">
+					<div class="col-3 m-5">
+						<img src="{{asset('produits/'~produit.image)}}" class="rounded-4" style="max-width: 100%; height: auto; objectif-fit: contain;">
+					</div>
+					<div class="col-6 m-5 border rounded-3 shadow">
+						<div class=" border rounded-3 text-dark mt-5 m-3 p-3 fs-5 shadow">Description:<br><br>{{ produit.description| capitalize }}</div>
+						<div class=" border rounded-3 text-dark mt-5 m-3 p-3 fs-5 shadow">Prix:
+							{{ produit.prix}}€</div>
+						<div class="border rounded-3 text-dark mt-3 m-3 p-3 fs-5 shadow fw-bold">Commander:
+							<a href="{{path('editpanier', {'id':produit.id, 'action':'ajouter'})}}" class="btn btn-outline-primary text-center" style="width: 10rem;">ajouter au panier</a>
+						</div>
+						<div class="rounded-3 text-dark text-center mt-3 m-3 p-3 fs-5">
+							{% if app.user %}
+								{% if produit in app.user.Favoris %}
+									<a class="btn btn-primary" href="{{path('favoris', {'id':produit.id, 'action':'supprimer'})}}">
+										<i class="bi bi-heart-fill"></i>
+									</a>
+								{% else %}
+									<a class="btn btn-primary" href="{{path('favoris', {'id':produit.id, 'action':'ajouter'})}}">
+										<i class="bi bi-heart"></i>
+									</a>
+								{% endif %}
+							{% endif %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+

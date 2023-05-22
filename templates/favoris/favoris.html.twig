@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{parent()}}Vos Favoris
+{% endblock %}
+
+
+{% block body %}
+	<div class="container-fluid">
+		<div class=" row justify-content-center">
+			<div class="col-12 col-md-9 p-4 m-3 rounded-5 shadow" style="background-color :#eaeaea">
+				<h1 class="text-center text-secondary mt-4 pt-4 display-1 fw-bold ">Favoris</h1>
+				<div class="row mb-4 d-flex justify-content-between align-items-center mt-4 text-center">
+					<div class="col-2">
+						Image
+					</div>
+					<div class="col-2">
+						Nom
+					</div>
+					<div class="col-2">
+						supprimer
+					</div>
+				</div>
+				{% if app.user.Favoris|length >= 1 %}
+				{% for produit in app.user.Favoris %}
+				<hr>
+					<div class="row mb-4 d-flex justify-content-between align-items-center mt-4 text-center">
+						<div class="col-2">
+							{% set url = 'minia/'~produit.minia %}
+							<img src="{{asset(url)}}" style"max-with: 100%; height: auto; objectif-fit: contain;"/>
+						</div>
+						<div class="col-2">
+							<h6 class="text-muted text-center">{{produit.designation | capitalize }}<h6>
+						</div>
+                        <div class="col-2">
+							<h6 class="text-black"><a href="{{path('favoris',{'id':produit.id,'action':'supprimer'})}}" class="text-decoration-none text-black"><i class="bi bi-trash3-fill"></i></a><h6>
+						</div>
+					</div>
+				</hr>
+				{% endfor %}
+				{% endif %}
+			</div>
+		</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{parent()}} Connectez-vous{% endblock %}
+
+{% block body %}
+
+<div class="container-fluid">
+	<h1 class="text-center text-secondary mt-4 pt-4 display-1 fw-bold ">Connectez-vous</h1>
+
+
+	<div class="row justify-content-center">
+		<div class="col rounded-5 col-md-4 mb-5 p-4 m-0" style="background-color: #eaeaea;">
+
+			<form method="post">
+				{% if error %}
+					<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+				{% endif %}
+
+				{% if app.user %}
+					<div class="mb-3 text-info">
+						tu est connecté en tant que
+						{{ app.user.username }},
+						<a href="{{ path('app_logout') }}">déconexion</a>
+					</div>
+				{% endif %}
+
+
+				<label for="inputEmail" class="fw-bold text-secondary">Email</label>
+				<input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+				<label for="inputPassword" class="fw-bold text-secondary">Mot de passe</label>
+				<input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+
+				<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+				<div class="text-center">
+					<button class="btn btn-outline-secondary text-black m-4"type="submit">CONNEXION</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
+
+

@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{parent()}}Panier
+{% endblock %}
+
+
+{% block body %}
+	<div class="container-fluid">
+		<div class=" row justify-content-center">
+			<div class="col-12 col-md-9 p-4 m-3 rounded-5 shadow" style="background-color :#eaeaea">
+				<h1 class="text-center text-secondary mt-4 pt-4 display-1 fw-bold ">Panier</h1>
+				<div class="row mb-4 d-flex justify-content-between align-items-center mt-4 text-center">
+					<div class="col-2">
+						Image
+					</div>
+					<div class="col-2">
+						Nom
+					</div>
+					<div class="col-2">
+						Prix  à l'unité
+					</div>
+					<div class="col-2">
+						Quantité
+					</div>
+					<div class="col-2">
+						supprimer
+					</div>
+				</div>
+				{% if app.user.panier.ajouters|length >= 1 %}
+				{% for lignePanier in app.user.panier.ajouters %}
+				<hr>
+					<div class="row mb-4 d-flex justify-content-between align-items-center mt-4 text-center">
+						<div class="col-2">
+							{% set url = 'minia/'~lignePanier.produit.minia %}
+							<img src="{{asset(url)}}" style"max-with: 100%; height: auto; objectif-fit: contain;"/>
+						</div>
+						<div class="col-2">
+							<h6 class="text-muted text-center">{{lignePanier.produit.designation | capitalize }}<h6>
+						</div>
+						<div class="col-2">
+							<h6 class="text-muted text-center">{{lignePanier.produit.prix | capitalize }}€<h6>
+						</div>
+						<div class="col-2 d-flex justify-content-center">
+						<a href="{{path('editpanier', {'id':lignePanier.id, 'action':'suppqte'})}}" class="nav-link text-black me-2">
+                            <i class="bi bi-dash-circle"></i>
+                        </a>
+							<h6 class="text-muted text-center">{{lignePanier.qte}}<h6>
+						<a href="{{ path('editpanier', {'id':lignePanier.id, 'action':'addqte'}) }}" class="nav-link text-black ms-2">
+                            <i class="bi bi-plus-circle"></i>
+                        </a>
+						</div>
+                        <div class="col-2">
+							<h6 class="text-black"><a href="{{path('editpanier',{'id':lignePanier.id,'action':'supprimer'})}}" class="text-decoration-none text-black"><i class="bi bi-trash3-fill"></i></a><h6>
+						</div>
+					</div>
+				</hr>
+				{% endfor %}
+				{% endif %}
+			</div>
+		</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{parent()}}Accueil{% endblock %}
+
+{% block body %}
+<!-- carousel-->
+<div id="carouselExampleInterval" class="carousel slide carousel-fade border-bottom border-dark" data-bs-ride="carousel">
+	<div class="carousel-inner">
+		<div class="carousel-item active" data-bs-interval="5000">
+			<img src="{{ asset('carousel/op.jpg') }}" class="d-block w-100" alt="...">
+		</div>
+		<div class="carousel-item" data-bs-interval="5000">
+			<img src="{{ asset('carousel/RW.jpg') }}" class="d-block w-100" alt="...">
+		</div>
+		<div class="carousel-item"data-bs-interval="5000">
+			<img src="{{ asset('carousel/ED.jpg') }}" class="d-block w-100" alt="...">
+		</div>
+	</div>
+	<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		<span class="visually-hidden">Previous</span>
+	</button>
+	<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+		<span class="carousel-control-next-icon" aria-hidden="true"></span>
+		<span class="visually-hidden">Next</span>
+	</button>
+</div>
+
+<!-- carousel-->
+<!--produits en tendance-->
+    <div class="container-fluid p-5">
+        <div class="row justify-content-center gx-4 gx-lg-5 p-4 m-3 shadow rounded-3" style="background-color :#eaeaea">
+            <h5 class="text-center text-secondary pt-4 display-1 fw-bold ">Suggestions</h5>
+            {% for produit in produits %}
+                <div class="px-1 px-lg-2 col-1 col-sm-6 col-md-6 col-xl-1 mx-5 mb-5">
+                    <div class="card border-1 mt-5 rounded-3 shadow" style="border-color :#000000">
+                        <a href="{{ path('produit_en_détail', {'id': produit.id}) }}">
+                            <img src="{{ 'minia/' ~ produit.minia }}" class="card-img-top rounded-3"/>
+                        </a>
+                        <div class="card-body rounded-3 p-0" style="background-color:#D6D6D6;"></div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+<!--produits en tendance-->
+
+<!--collections aléatoires-->
+
+<div class="container-fluid p-5">
+  <div class="row justify-content-center gx-4 gx-lg-5 p-4 m-3 shadow rounded-3" style="background-color: #eaeaea">
+    <h5 class="text-center text-secondary pt-4 display-1 fw-bold"></h5>
+    {% for collection in collections %}
+    <div class="px-1 px-lg-2 col-4 col-sm-6 col-md-6 col-xl-3 mb-5">
+      <div class="card border-1 mt-5 rounded-3 shadow" style="border-color: #000000">
+        <a href="{{ path('incollections', {'id': collection.id}) }}">
+          <img src="{{'coll/' ~ collection.image}}" class="card-img-top rounded-top-3" style="max-width: 100%;">
+        </a>
+        <div class="card-body rounded-bottom-3 p-1" style="background-color: #D6D6D6;">
+          <p class="card-text text-center p-3">{{collection.libelle}}</p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+
+<!--collections aléatoires-->
+
+{% endblock %}

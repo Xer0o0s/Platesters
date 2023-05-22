@@ -1,0 +1,6 @@
+<body style="background: linear-gradient(black, red);background-repeat: no-repeat;background-size: cover;">
+<body style="background-color :#8C0000;">
+
+{{ asset('carousel/op.jpg') }}
+{{ asset('carousel/RW.jpg') }}
+{{ asset('carousel/ED.jpg') }}

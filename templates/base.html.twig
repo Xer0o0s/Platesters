@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="fr">
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		{% block stylesheets %}
+			<!-- Bootstrap CSS -->
+			<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
+			<link href="https://bootswatch.com/5/simplex/bootstrap.min.css" rel="stylesheet">
+			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+			<link href="css/style.css" rel="stylesheet">
+
+		{% endblock %}
+		<title>{% block title %}Platster -{% endblock %}</title>
+	</head>
+	{% block B %}<body style="background-color :#C82E2E;">{% endblock %}
+
+
+		<nav class="navbar navbar-expand-lg navbar-light border-end-0 border-start-0 border-top-0 shadow " style="background-color :#eaeaea; border-color :#6c6c6c;">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="{{path('index')}}"><img src="{{ asset('images/PlateSters.png') }}" width="85" height="75"/></a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse justify-content-center" id="navbarColor01">
+					<ul class="navbar-nav">
+						<li class="nav-item">
+							<a class="nav-link active" href="{{path('index')}}">ACCUEIL
+								<span class="visually-hidden">(current)</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{{path('Découvre les tous')}}">DÉCOUVRE LES TOUS</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{{path('collections')}}">COLLECTIONS</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{{path('qu est ce que Platester')}}">QU'EST CE QUE PLATESTERS</a>
+						</li>
+						{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+						</li>
+						<li class="nav-item">
+							<a class="nav-link " href="{{path('profile')}}">
+								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-square" viewbox="0 0 16 16"><path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/><path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1v-1c0-1-1-4-6-4s-6 3-6 4v1a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12z"/></svg>
+							</a>
+						</li>
+
+					{% endif %}
+						
+
+					<!--dropdown administration-->
+						{% if is_granted('ROLE_ADMIN') or is_granted('ROLE_MOD')%}
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+									ADMIN
+								</a>
+								<ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+									
+									<li>
+										<a class="dropdown-item"href="{{path('ajout_produit')}}">Ajout produit</a>
+									</li>
+									<li>
+										<a class="dropdown-item" href="{{path('ajout_collection')}}">Ajout collection</a>
+									</li>
+									<li>
+										<a class="dropdown-item" href="{{path('liste-collections')}}">Liste collection</a>
+									</li>
+									<li>
+										<a class="dropdown-item" href="{{path('liste-produits')}}">Liste produits</a>
+									</li>
+                                </ul>
+                            </li>
+						{% endif %}
+					</ul>
+				</div>
+				
+				<div>
+					<a class="nav-link" href="{{path('afffavoris')}}">
+						<i class="bi bi-heart-fill"></i>
+					</a>
+				</div>
+
+				<div>
+					<a class="nav-link" href="{{path('panier')}}">
+						<svg xmlns="http://www.w3.org/2000/svg" height="30" viewbox="0 96 960 960" width="48">
+							<path d="M286.788 975Q257 975 236 953.788q-21-21.213-21-51Q215 873 236.212 852q21.213-21 51-21Q317 831 338 852.212q21 21.213 21 51Q359 933 337.788 954q-21.213 21-51 21Zm400 0Q657 975 636 953.788q-21-21.213-21-51Q615 873 636.212 852q21.213-21 51-21Q717 831 738 852.212q21 21.213 21 51Q759 933 737.788 954q-21.213 21-51 21ZM235 315l110 228h288l125-228H235Zm-30-60h589.074q22.964 0 34.945 21Q841 297 829 318L694 561q-11 19-28.559 30.5Q647.881 603 627 603H324l-56 104h491v60H277q-42 0-60.5-28t.5-63l64-118-152-322H51v-60h117l37 79Zm140 288h288-288Z"/>
+						</svg>
+					</a>
+				</div>
+				{% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+					<div>
+						<a href="#" data-bs-toggle="modal" data-bs-target="#supprimer">
+							<svg xmlns="http://www.w3.org/2000/svg" height="30" viewbox="0 96 960 960" width="48">
+								<path d="M539.882 576Q589 576 623.5 541.618q34.5-34.383 34.5-83.5Q658 409 623.618 374.5q-34.383-34.5-83.5-34.5Q491 340 456.5 374.382q-34.5 34.383-34.5 83.5Q422 507 456.382 541.5q34.383 34.5 83.5 34.5ZM260 797q51-65 124-103t156-38q83 0 156 38t124 103V236H260v561Zm0 59q-24.75 0-42.375-17.625T200 796V236q0-24.75 17.625-42.375T260 176h560q24.75 0 42.375 17.625T880 236v560q0 24.75-17.625 42.375T820 856H260ZM140 976q-24.75 0-42.375-17.625T80 916V346h60v570h570v60H140Zm400-460q-24 0-41-17t-17-41q0-24 17-41t41-17q24 0 41 17t17 41q0 24-17 41t-41 17ZM353 796h374q-36-39-84.5-59.5T540 716q-54 0-102.5 20.5T353 796Zm187-280Z"/>
+							</svg>
+						</a>
+
+						<div class="modal fade" id="supprimer">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h1 class="modal-title fs-5" id="supprimer">Connexion/Inscription</h1>
+										<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+									</div>
+									<div class="modal-body">
+										<p>Voulez-vous vous connecter ou vous inscrire ?</p>
+									</div>
+									<div class="modal-footer">
+										<a class="nav-link ml-3" href="{{path('app_login')}}">Se connecter</a>
+										<a class="nav-link" href="{{path('app_register')}}">S'inscrire</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				{% else %}
+					<div>
+						<a class="nav-link" href="{{path('app_logout')}}">
+							<svg xmlns="http://www.w3.org/2000/svg" height="30" width="48" fill="currentColor" class="bi bi-bookmark-x" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M6.146 5.146a.5.5 0 0 1 .708 0L8 6.293l1.146-1.147a.5.5 0 1 1 .708.708L8.707 7l1.147 1.146a.5.5 0 0 1-.708.708L8 7.707 6.854 8.854a.5.5 0 1 1-.708-.708L7.293 7 6.146 5.854a.5.5 0 0 1 0-.708z"/><path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/></svg>
+						</a>
+					</div>
+				{% endif %}
+			</div>
+
+			</div>
+		</nav>
+
+		{% block body %}{% endblock %}
+
+
+		<!-- Footer -->
+		<footer class="w-100 p-0 m-0 shadow">
+			<div class="container-fluid">
+				<div class="row justify-content-center align-middle ">
+					<div class="col-12 text-center align-middle p-2 m-0 fixed-bottom" style="background-color :#d5d5d5; border-color :#6c6c6c;">
+						<span class="align-middle ">
+							<small>
+								<a href="#" class="text-black m-1">Accueil</a>
+							</small>
+							<small>
+								<a href="{{path('Découvre les tous')}}" class="text-black m-1">Découvre les tous</a>
+							</small>
+							<small>
+								<a href="{{path('collections')}}" class="text-black m-1">Collection</a>
+							</small>
+							<small>
+								<a href="{{path('qu est ce que Platester')}}" class="text-black m-1">Qu'est ce que Platesters</a>
+							</small>
+							<div>
+								<small>Tous droits réservés 2022-2023 //</small>
+							</div>
+						</span>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<!-- Footer -->
+	</body>
+</html>
+
+{% block javascripts %}{% endblock %}
+
